@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { showError } from '../services/toastifyAlert';
+import { showError } from '../../services/toastifyAlert';
 
 axios.defaults.baseURL = 'https://68167ace26a599ae7c37fba3.mockapi.io';
 

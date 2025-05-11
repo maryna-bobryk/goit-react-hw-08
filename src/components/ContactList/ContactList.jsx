@@ -5,7 +5,7 @@ import {
   selectError,
   selectFilteredContactsMemo,
   selectLoading,
-} from '../../redux/contactsSlice';
+} from '../../redux/contacts/selectors';
 import { DiVim } from 'react-icons/di';
 import Loader from '../Loader/Loader';
 import 'react-toastify/dist/ReactToastify.css';

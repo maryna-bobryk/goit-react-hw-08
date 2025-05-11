@@ -1,8 +1,9 @@
-import { useDispatch, useSelector } from 'react-redux';
 import s from './SearchBox.module.css';
-import { changeFilter, selectNameFilter } from '../../redux/filtersSlice';
-import { selectFilteredContactsMemo } from '../../redux/contactsSlice';
 import { showError } from '../../services/toastifyAlert';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeFilter } from '../../redux/filters/slice';
+import { selectFilteredContactsMemo } from '../../redux/contacts/selectors';
+import { selectNameFilter } from '../../redux/filters/selectors';
 
 const SearchBox = () => {
   const dispatch = useDispatch();
