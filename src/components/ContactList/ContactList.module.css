@@ -1,0 +1,9 @@
+.contactList {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.contactItem {
+  min-width: 380px;
+}
