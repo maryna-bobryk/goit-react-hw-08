@@ -1,5 +1,4 @@
 import s from './SearchBox.module.css';
-import { showError } from '../../services/toastifyAlert';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeFilter } from '../../redux/filters/slice';
 import { selectFilteredContactsMemo } from '../../redux/contacts/selectors';

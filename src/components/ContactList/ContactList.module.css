@@ -1,9 +1,12 @@
 .contactList {
+  margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
+  max-width: 900px;
 }
 
 .contactItem {
-  min-width: 380px;
+  margin: 0 auto;
+  width: 400px;
 }
