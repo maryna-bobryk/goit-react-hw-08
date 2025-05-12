@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 
 import { useDispatch } from 'react-redux';
 import { addContact } from '../../redux/contacts/operations';
+import toast from 'react-hot-toast';
 
 const ContactForm = () => {
   const initialValues = {
@@ -12,12 +13,25 @@ const ContactForm = () => {
   };
 
   const dispatch = useDispatch();
-  const handleAddContact = values => {
-    const newContact = {
-      name: values.name,
-      number: values.number,
-    };
-    dispatch(addContact(newContact));
+  // const handleAddContact = values => {
+  //   const newContact = {
+  //     name: values.name,
+  //     number: values.number,
+  //   };
+  //   dispatch(addContact(newContact));
+  // };
+
+  const handleAddContact = async values => {
+    try {
+      const newContact = {
+        name: values.name,
+        number: values.number,
+      };
+      await dispatch(addContact(newContact)).unwrap();
+      toast.success(`Contact "${newContact.name}" added successfully`);
+    } catch (error) {
+      toast.error(`Failed to add contact: ${error}`);
+    }
   };
 
   const onSubmit = (values, options) => {

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { changeFilter } from '../../redux/filters/slice';
 import { selectFilteredContactsMemo } from '../../redux/contacts/selectors';
 import { selectNameFilter } from '../../redux/filters/selectors';
+import toast from 'react-hot-toast';
 
 const SearchBox = () => {
   const dispatch = useDispatch();
@@ -13,7 +14,7 @@ const SearchBox = () => {
     const query = e.target.value;
     dispatch(changeFilter(query));
     if (contacts.length === 0) {
-      showError('Keine Kontakte gefunden.');
+      toast.error('Keine Kontakte gefunden.');
     }
   };
 
