@@ -1,12 +1,14 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import SharedLayout from './components/SharedLayout/SharedLayout';
-import { lazy, useEffect } from 'react';
+import Layout from './components/Layout/Layout';
+import { lazy, useEffect, Suspense } from 'react';
 import { refreshUserThunk } from './redux/auth/operations';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsRefreshing } from './redux/auth/selectors';
 import PrivateRoute from './components/PrivateRoute';
 import RestrictedRoute from './components/RestrictedRoute';
+import Loader from './components/Loader/Loader';
+
 const Home = lazy(() => import('./pages/Home/Home'));
 const Contacts = lazy(() => import('./pages/Contacts/Contacts'));
 const NotFound = lazy(() => import('./pages/NotFound/NotFound'));
@@ -21,10 +23,12 @@ function App() {
     dispatch(refreshUserThunk());
   }, [dispatch]);
 
-  return isRefreshing ? null : (
-    <>
+  if (isRefreshing) return null;
+
+  return (
+    <Suspense fallback={<Loader />}>
       <Routes>
-        <Route path="/" element={<SharedLayout />}>
+        <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route
             path="/contacts"
@@ -33,7 +37,12 @@ function App() {
             }
           />
         </Route>
-        <Route path="/register" element={<Register />} />
+        <Route
+          path="/register"
+          element={
+            <RestrictedRoute redirectTo="/contacts" component={<Register />} />
+          }
+        />
         <Route
           path="/login"
           element={
@@ -42,7 +51,7 @@ function App() {
         />
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </>
+    </Suspense>
   );
 }
 

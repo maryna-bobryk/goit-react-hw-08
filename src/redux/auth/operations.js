@@ -54,11 +54,11 @@ export const logoutThunk = createAsyncThunk(
 export const refreshUserThunk = createAsyncThunk(
   'auth/refresh',
   async (_, thunkAPI) => {
+    const savedToken = thunkAPI.getState().auth.token;
+    if (!savedToken) {
+      return thunkAPI.rejectWithValue('Tocken is not exist');
+    }
     try {
-      const savedToken = thunkAPI.getState().auth.token;
-      if (!savedToken) {
-        return thunkAPI.rejectWithValue('Tocken is not exist');
-      }
       setAuthHeader(savedToken);
       const response = await goitAPI.get('/users/current');
       console.log(response.data);
